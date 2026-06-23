@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import { m, useAnimationControls } from 'framer-motion';
 import Image from 'next/image';
 
+import { useLanguage } from '@/contexts/LanguageContext';
+
 const animation = {
   hide: { x: -32, opacity: 0 },
   show: {
@@ -12,6 +14,7 @@ const animation = {
 
 function HeaderTitle() {
   const controls = useAnimationControls();
+  const { t } = useLanguage();
 
   return (
     <div>
@@ -25,7 +28,7 @@ function HeaderTitle() {
         animate={animation.show}
         transition={{ delay: 0.1 }}
       >
-        hi!
+        {t('greeting')}
         <m.div
           initial={{
             opacity: 0,
@@ -68,15 +71,11 @@ function HeaderTitle() {
           animate={animation.show}
           transition={{ delay: 0.2 }}
         >
-          I&apos;m{' '}
-          <strong className={clsx('text-accent-600', 'dark:text-accent-500')}>
-            Mahesh
-          </strong>{' '}
-          Babu,{' '}
+          {t('nameTitle')}
         </m.span>
         <m.h1
           className={clsx(
-            'block text-base text-slate-600',
+            'block text-base text-slate-600 max-w-2xl',
             'md:text-xl',
             'dark:text-slate-400'
           )}
@@ -84,17 +83,15 @@ function HeaderTitle() {
           animate={animation.show}
           transition={{ delay: 0.3 }}
         >
-          <span className={clsx('lowercase')}>A</span>{' '}
           <strong
             className={clsx(
-              'font-bold lowercase text-slate-700',
+              'font-bold text-slate-700',
               'dark:text-slate-300'
             )}
           >
-            Back-End Developer
-          </strong>{' '}
-          who loves to build{' '}
-          <span className={clsx('block')}>efficient and scalable systems.</span>
+            {t('role')}
+          </strong>
+          <span className={clsx('block')}>{t('heroDescription')}</span>
         </m.h1>
       </span>
     </div>

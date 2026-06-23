@@ -3,14 +3,15 @@ import { m } from 'framer-motion';
 
 import {
   GitIcon,
-  HibernateIcon,
-  IntellijIdeaIcon,
-  JavaIcon,
-  MavenIcon,
-  PostgresIcon,
-  SpringBootIcon,
-  SqlServerIcon,
+  TypeScriptIcon,
+  ReactIcon,
+  NextJsIcon,
+  VSCodeIcon,
+  NodejsIcon,
+  PythonIcon,
+  DockerIcon,
 } from '@/components/Icons';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const animation = {
   hide: { x: -8, opacity: 0 },
@@ -21,6 +22,8 @@ const animation = {
 };
 
 function HeaderTechStack() {
+  const { t } = useLanguage();
+
   return (
     <div>
       <m.p
@@ -29,7 +32,7 @@ function HeaderTechStack() {
         animate={animation.show}
         transition={{ delay: 0.6 }}
       >
-        current favorite tech stack/tools:
+        {t('favoriteTech')}
       </m.p>
       <m.ul
         className={clsx(
@@ -41,46 +44,45 @@ function HeaderTechStack() {
         transition={{ delayChildren: 0.6, staggerChildren: 0.025 }}
       >
         <m.li variants={animation}>
-          <div className={clsx('transition duration-200 hover:text-[#cf0202]')}>
-            <JavaIcon className={clsx('h-6 w-6')} />
+          <div className={clsx('transition duration-200 hover:text-[#007acc]')}>
+            <TypeScriptIcon className={clsx('h-6 w-6')} />
           </div>
         </m.li>
         <m.li variants={animation}>
-          <div className={clsx('transition duration-200 hover:text-[#049115]')}>
-            <SpringBootIcon className={clsx('h-6 w-6')} />
+          <div className={clsx('transition duration-200 hover:text-[#61dafb]')}>
+            <ReactIcon className={clsx('h-6 w-6')} />
           </div>
         </m.li>
         <m.li variants={animation}>
-          <div className={clsx('transition duration-200 hover:text-[#f7d683]')}>
-            <HibernateIcon className={clsx('h-6 w-6')} />
-          </div>
-        </m.li>
-
-        <m.li variants={animation}>
-          <div className={clsx('transition duration-200 hover:text-[#961754]')}>
-            <MavenIcon className={clsx('h-6 w-6')} />
+          <div className={clsx('transition duration-200 hover:text-[#000000] dark:hover:text-[#ffffff]')}>
+            <NextJsIcon className={clsx('h-6 w-6')} />
           </div>
         </m.li>
         <m.li variants={animation}>
-          <div className={clsx('transition duration-200 hover:text-[#105082]')}>
-            <PostgresIcon className={clsx('h-6 w-6')} />
+          <div className={clsx('transition duration-200 hover:text-[#339933]')}>
+            <NodejsIcon className={clsx('h-6 w-6')} />
           </div>
         </m.li>
         <m.li variants={animation}>
-          <div className={clsx('transition duration-200 hover:text-[#6b0202]')}>
-            <SqlServerIcon className={clsx('h-6 w-6')} />
+          <div className={clsx('transition duration-200 hover:text-[#3776ab]')}>
+            <PythonIcon className={clsx('h-6 w-6')} />
           </div>
         </m.li>
         <m.li variants={animation}>
           <div className={clsx('h-3 w-[1px] bg-slate-300 dark:bg-slate-700')} />
         </m.li>
         <m.li variants={animation}>
-          <div className={clsx('transition duration-200 hover:text-[#FFFFFF]')}>
-            <IntellijIdeaIcon className={clsx('h-6 w-6')} />
+          <div className={clsx('transition duration-200 hover:text-[#2496ed]')}>
+            <DockerIcon className={clsx('h-6 w-6')} />
           </div>
         </m.li>
         <m.li variants={animation}>
-          <div className={clsx('transition duration-200 hover:text-[#fa5c5c]')}>
+          <div className={clsx('transition duration-200 hover:text-[#007acc]')}>
+            <VSCodeIcon className={clsx('h-6 w-6')} />
+          </div>
+        </m.li>
+        <m.li variants={animation}>
+          <div className={clsx('transition duration-200 hover:text-[#f05032]')}>
             <GitIcon className={clsx('h-6 w-6')} />
           </div>
         </m.li>

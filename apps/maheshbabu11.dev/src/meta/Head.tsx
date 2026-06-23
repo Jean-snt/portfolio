@@ -22,7 +22,7 @@ function Head({
 
   const htmlTitle = overrideTitle
     ? title
-    : `${title} — Mahesh · Back-End Developer`;
+    : `${title} — Junior · Desarrollador de Software`;
 
   return (
     <NextHead>
@@ -39,8 +39,6 @@ function Head({
       <meta property="og:image:alt" content={`Image with "${title}" text.`} />
       {/* twitter card */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@MaheshBabu11_" />
-      <meta name="twitter:creator" content="@MaheshBabu11_" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
@@ -49,12 +47,6 @@ function Head({
       {structuredData && (
         <script type="application/ld+json">{structuredData}</script>
       )}
-      ,
-      <Script
-        defer
-        src="https://umami.maheshbabu11.dev/umami.js"
-        data-website-id="e83d9698-6a36-4184-aa25-a3d8c9675b92"
-      />
     </NextHead>
   );
 }

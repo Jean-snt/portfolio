@@ -7,8 +7,8 @@ function Index() {
   return (
     <>
       <Head
-        title="Mahesh Babu | Back-End Developer"
-        description="An online portfolio featuring a showcase of my projects and some thoughts as a Back-End Developer who loves to build efficient and scalable systems."
+        title="Junior Giancarlo Sulca Méndez | Desarrollador de Software"
+        description="Portafolio profesional de Junior Giancarlo Sulca Méndez, Desarrollador de Software especializado en backend, frontend y cloud computing."
         ogImage={`${getBaseUrl()}/assets/images/og-image.png`}
         overrideTitle
       />

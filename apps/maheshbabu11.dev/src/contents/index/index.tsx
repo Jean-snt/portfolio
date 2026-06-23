@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 
 import { CodeIcon, HeartIcon, SparklesIcon } from '@/components/Icons';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 import FeaturedCard from '@/contents/index/FeaturedCard';
 import Header from '@/contents/index/Header';
@@ -10,51 +11,76 @@ import GithubContribCard from '@/contents/index/GithubContrib';
 import SkillsAndTech from './SkillsAndTech';
 
 function FeaturedCardSection() {
+  const { language } = useLanguage();
+  const cards = [
+    {
+      title:
+        language === 'es'
+          ? 'Diseno de sistemas escalables'
+          : 'Scalable System Design',
+      desc:
+        language === 'es'
+          ? 'Creo sistemas preparados para crecer con estabilidad y buen rendimiento.'
+          : 'Create scalable systems to ensure robustness for growing demands.',
+      icon: (
+        <div
+          className={clsx(
+            'rounded-full bg-amber-300 p-3.5',
+            'dark:bg-amber-900'
+          )}
+        >
+          <SparklesIcon className={clsx('h-5 w-5 text-white')} />
+        </div>
+      ),
+    },
+    {
+      title: language === 'es' ? 'Orientado al detalle' : 'Detail Oriented',
+      desc:
+        language === 'es'
+          ? 'Trabajo con precision para cuidar cada aspecto del resultado final.'
+          : 'Precise and meticulous, ensuring attention to every aspect for refined outcomes.',
+      icon: (
+        <div
+          className={clsx(
+            'rounded-full bg-pink-300 p-3.5',
+            'dark:bg-pink-900'
+          )}
+        >
+          <HeartIcon className={clsx('h-5 w-5 text-white')} />
+        </div>
+      ),
+    },
+    {
+      title:
+        language === 'es' ? 'Limpio y optimizado' : 'Pretty & Optimized',
+      desc:
+        language === 'es'
+          ? 'Priorizo codigo claro, mantenible y optimizado para productos reales.'
+          : 'Writing clean code is a top priority while keeping it as optimized as possible.',
+      icon: (
+        <div
+          className={clsx(
+            'rounded-full bg-sky-300 p-3.5',
+            'dark:bg-sky-900'
+          )}
+        >
+          <CodeIcon className={clsx('h-5 w-5 text-white')} />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div className={clsx('content-wrapper')}>
       <div className={clsx('flex flex-col gap-4', 'lg:flex-row lg:gap-8')}>
-        <FeaturedCard
-          icon={
-            <div
-              className={clsx(
-                'rounded-full bg-amber-300 p-3.5',
-                'dark:bg-amber-900'
-              )}
-            >
-              <SparklesIcon className={clsx('h-5 w-5 text-white')} />
-            </div>
-          }
-          title="Scalable System Design"
-          desc="Create scalable systems to ensure robustness for growing demands."
-        />
-        <FeaturedCard
-          icon={
-            <div
-              className={clsx(
-                'rounded-full bg-pink-300 p-3.5',
-                'dark:bg-pink-900'
-              )}
-            >
-              <HeartIcon className={clsx('h-5 w-5 text-white')} />
-            </div>
-          }
-          title="Detail Oriented"
-          desc="Precise and meticulous, ensuring attention to every aspect for refined outcomes."
-        />
-        <FeaturedCard
-          icon={
-            <div
-              className={clsx(
-                'rounded-full bg-sky-300 p-3.5',
-                'dark:bg-sky-900'
-              )}
-            >
-              <CodeIcon className={clsx('h-5 w-5 text-white')} />
-            </div>
-          }
-          title="Pretty & Optimized"
-          desc="Writing clean code is a top priority while keeping it as optimized as possible."
-        />
+        {cards.map((card) => (
+          <FeaturedCard
+            key={card.title}
+            icon={card.icon}
+            title={card.title}
+            desc={card.desc}
+          />
+        ))}
       </div>
     </div>
   );

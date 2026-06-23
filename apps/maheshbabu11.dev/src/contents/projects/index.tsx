@@ -1,321 +1,102 @@
 import clsx from 'clsx';
-import { useState } from 'react';
 
-import {
-  GitHubIcon,
-  JavaIcon,
-  MavenIcon,
-  NextJsIcon,
-  NpmIcon,
-  TailwindCssIcon,
-} from '@/components/Icons';
-import { SectionButton } from '@/components/sections/SectionButton';
-import SectionContent from '@/components/sections/SectionContent';
-import SectionTitle from '@/components/sections/SectionTitle';
-import AppWindow from '@/components/wireframes/AppWindow';
-import GitHubWireframe from '@/components/wireframes/GitHub';
-import GitHubPackageWireframe from '@/components/wireframes/GithubPackage';
-import NpmWireframe from '@/components/wireframes/Npm';
+import { Label } from '@/components/mdx/Labels';
+import { useLanguage } from '@/contexts/LanguageContext';
 
-import Accordion from './Accordian';
-
-function generateDependency(
-  groupId: string,
-  artifactId: string,
-  version: string
-): string {
-  return `
-    <dependency>
-      <groupId>${groupId}</groupId>
-      <artifactId>${artifactId}</artifactId>
-      <version>${version}</version>
-    </dependency>
-  `;
-}
+const projects = {
+  es: [
+    {
+      title: 'Intranet Corporativa',
+      description:
+        'Implementacion y despliegue de soluciones internas para mejorar seguimiento, coordinacion y operacion de areas empresariales.',
+      tags: ['Intranet', 'Hostinger', 'QA', 'Gestion'],
+    },
+    {
+      title: 'Sistemas Web para Negocios',
+      description:
+        'Desarrollo de interfaces, backend y bases de datos para servicios digitales orientados a clientes y procesos internos.',
+      tags: ['React', 'Node.js', 'SQL Server', 'MongoDB'],
+    },
+    {
+      title: 'Automatizacion y Mejora Operativa',
+      description:
+        'Analisis de procesos, seguimiento de objetivos y soporte tecnico para elevar rendimiento, control y continuidad de servicios.',
+      tags: ['Automatizacion', 'DevOps', 'Docker', 'Cloud'],
+    },
+  ],
+  en: [
+    {
+      title: 'Corporate Intranet',
+      description:
+        'Implementation and deployment of internal solutions to improve tracking, coordination, and business area operations.',
+      tags: ['Intranet', 'Hostinger', 'QA', 'Operations'],
+    },
+    {
+      title: 'Web Systems for Businesses',
+      description:
+        'Development of interfaces, backend services, and databases for client-facing digital services and internal processes.',
+      tags: ['React', 'Node.js', 'SQL Server', 'MongoDB'],
+    },
+    {
+      title: 'Automation and Operational Improvement',
+      description:
+        'Process analysis, goal tracking, and technical support to improve performance, control, and service continuity.',
+      tags: ['Automation', 'DevOps', 'Docker', 'Cloud'],
+    },
+  ],
+};
 
 function ProjectsContents() {
-  const [currentState, setCurrentState] = useState<'npm' | 'github' | 'maven'>(
-    'github'
-  );
-  const [openAccordion, setOpenAccordion] = useState(0);
-
-  const handleAccordionClick = (index) => {
-    setOpenAccordion(openAccordion === index ? null : index);
+  const { language } = useLanguage();
+  const copy = {
+    es: {
+      intro:
+        'Estos proyectos resumen mi enfoque: resolver necesidades reales con software claro, mantenible y orientado a resultados.',
+      cta: 'Disponible para nuevos proyectos y colaboraciones.',
+    },
+    en: {
+      intro:
+        'These projects summarize my approach: solving real needs with clear, maintainable, results-focused software.',
+      cta: 'Available for new projects and collaborations.',
+    },
   };
 
   return (
-    <div className="content-wrapper">
-      <Accordion
-        title="Ntfy-Java"
-        isOpen={openAccordion === 0}
-        onClick={() => handleAccordionClick(0)}
-        index={1}
-        icons={[
-          <JavaIcon
+    <div className={clsx('content-wrapper space-y-8')}>
+      <p className={clsx('max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300')}>
+        {copy[language].intro}
+      </p>
+      <div className={clsx('grid gap-5 md:grid-cols-2 xl:grid-cols-3')}>
+        {projects[language].map((project) => (
+          <article
+            key={project.title}
             className={clsx(
-              'h-5 w-5 transition duration-200 hover:text-[#cf0202]'
+              'rounded-lg border border-slate-200 bg-white p-5 shadow-sm',
+              'dark:border-slate-800 dark:bg-slate-900/70'
             )}
-          />,
-          <MavenIcon
-            className={clsx(
-              'h-6 w-6 transition duration-200 hover:text-[#961754]'
-            )}
-          />,
-        ]}
-        progress={60}
+          >
+            <h2 className={clsx('text-xl font-semibold')}>{project.title}</h2>
+            <p className={clsx('mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300')}>
+              {project.description}
+            </p>
+            <div className={clsx('mt-4 flex flex-wrap gap-2')}>
+              {project.tags.map((tag) => (
+                <Label key={tag} indicator={85}>
+                  {tag}
+                </Label>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+      <div
+        className={clsx(
+          'rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm font-semibold',
+          'text-slate-700 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-300'
+        )}
       >
-        <SectionTitle
-          title="Ntfy-Java"
-          caption="Java"
-          description="Java library for publishing/receiving messages from a ntfy server.
-          ntfy (pronounce: notify) is a simple HTTP-based pub-sub notification service.
-          ntfy-java is a Java wrapper for this service. The workflow is to replicate the GET/POST calls to ntfy-based servers and provide a neat way to create a client/streaming service to send/receive notifications."
-          buttons={[
-            {
-              title: 'learn more',
-              href: 'https://github.com/MaheshBabu11/ntfy-java',
-            },
-          ]}
-        />
-        <SectionContent>
-          <div className={clsx('flex', 'lg:gap-12')}>
-            <div
-              className={clsx('hidden flex-1 flex-col gap-3 pt-8', 'lg:flex')}
-            >
-              <div className={clsx('flex flex-col gap-3')}>
-                <SectionButton
-                  title="Available on GitHub"
-                  icon={<GitHubIcon className={clsx('my-2 h-16 w-16')} />}
-                  description="Access powerful and flexible package on GitHub with MIT license."
-                  active={currentState === 'github'}
-                  onClick={() => setCurrentState('github')}
-                />
-                <SectionButton
-                  title="Maven package"
-                  icon={<MavenIcon className={clsx('my-2 h-16 w-16')} />}
-                  description="Install and use the package with ease from github maven artifactory."
-                  active={currentState === 'maven'}
-                  onClick={() => setCurrentState('maven')}
-                />
-              </div>
-            </div>
-            <div className={clsx('w-full', 'lg:w-auto')}>
-              <div className={clsx('-mt-[41px]')}>
-                <div className={clsx('w-full', 'lg:h-[400px] lg:w-[600px]')}>
-                  <AppWindow
-                    type="browser"
-                    browserTabs={[
-                      {
-                        icon: <GitHubIcon className="h-4 w-4" />,
-                        title: 'MaheshBabu11/ntfy-java - GitHub',
-                        isActive: currentState === 'github',
-                      },
-                      {
-                        icon: <MavenIcon className="h-4 w-4" />,
-                        title: 'com.github.maheshbabu11.ntfy.java',
-                        isActive: currentState === 'maven',
-                      },
-                    ]}
-                  >
-                    {currentState === 'github' && (
-                      <GitHubWireframe
-                        author="MaheshBabu11"
-                        license="Apache-2.0 license"
-                        repository="ntfy-java"
-                        description="This is a java client that is used for publishing notifications using NTFY."
-                      />
-                    )}
-                    {currentState === 'maven' && (
-                      <GitHubPackageWireframe
-                        packageName="com.github.maheshbabu11.ntfy.java"
-                        version="1.0.0 SNAPSHOT"
-                        dependency={generateDependency(
-                          'com.github.maheshbabu11',
-                          'ntfy.java',
-                          '1.0.0-SNAPSHOT'
-                        )}
-                      />
-                    )}
-                  </AppWindow>
-                </div>
-              </div>
-            </div>
-          </div>
-        </SectionContent>
-      </Accordion>
-      <Accordion
-        title="Excel2DataMap"
-        isOpen={openAccordion === 1}
-        onClick={() => handleAccordionClick(1)}
-        index={2}
-        icons={[
-          <JavaIcon
-            className={clsx(
-              'h-5 w-5 transition duration-200 hover:text-[#cf0202]'
-            )}
-          />,
-          <MavenIcon
-            className={clsx(
-              'h-6 w-6 transition duration-200 hover:text-[#961754]'
-            )}
-          />,
-        ]}
-        progress={100}
-      >
-        <SectionTitle
-          title="Excel2DataMap"
-          caption="Java"
-          description="This is a java package that is used to convert Excel files from various formats like .xls,xls,csv to datamaps so that they can be directly used to insert data into database tables."
-          buttons={[
-            {
-              title: 'learn more',
-              href: 'https://github.com/MaheshBabu11/Excel2DataMap',
-            },
-          ]}
-        />
-        <SectionContent>
-          <div className={clsx('flex', 'lg:gap-12')}>
-            <div
-              className={clsx('hidden flex-1 flex-col gap-3 pt-8', 'lg:flex')}
-            >
-              <div className={clsx('flex flex-col gap-3')}>
-                <SectionButton
-                  title="Available on GitHub"
-                  icon={<GitHubIcon className={clsx('my-2 h-16 w-16')} />}
-                  description="Access powerful and flexible package on GitHub with MIT license."
-                  active={currentState === 'github'}
-                  onClick={() => setCurrentState('github')}
-                />
-                <SectionButton
-                  title="Maven package"
-                  icon={<MavenIcon className={clsx('my-2 h-16 w-16')} />}
-                  description="Install and use the package with ease from github maven artifactory."
-                  active={currentState === 'maven'}
-                  onClick={() => setCurrentState('maven')}
-                />
-              </div>
-            </div>
-            <div className={clsx('w-full', 'lg:w-auto')}>
-              <div className={clsx('-mt-[41px]')}>
-                <div className={clsx('w-full', 'lg:h-[400px] lg:w-[600px]')}>
-                  <AppWindow
-                    type="browser"
-                    browserTabs={[
-                      {
-                        icon: <GitHubIcon className="h-4 w-4" />,
-                        title: 'MaheshBabu11/Excel2DataMap - GitHub',
-                        isActive: currentState === 'github',
-                      },
-                      {
-                        icon: <MavenIcon className="h-4 w-4" />,
-                        title: 'com.github.maheshbabu11.excel2datamap',
-                        isActive: currentState === 'maven',
-                      },
-                    ]}
-                  >
-                    {currentState === 'github' && (
-                      <GitHubWireframe
-                        author="MaheshBabu11"
-                        license="Apache-2.0 license"
-                        repository="Excel2DataMap"
-                        description="This is a java package for converting excel files to datamaps."
-                      />
-                    )}
-                    {currentState === 'maven' && (
-                      <GitHubPackageWireframe
-                        packageName="com.github.maheshbabu11.excel2datamap"
-                        version="1.0.0 SNAPSHOT"
-                        dependency={generateDependency(
-                          'com.github.maheshbabu11',
-                          'excel2datamap',
-                          '1.0.0-SNAPSHOT'
-                        )}
-                      />
-                    )}
-                  </AppWindow>
-                </div>
-              </div>
-            </div>
-          </div>
-        </SectionContent>
-      </Accordion>
-      <Accordion
-        title="Code-Coffee-Repeat"
-        isOpen={openAccordion === 2}
-        onClick={() => handleAccordionClick(2)}
-        index={3}
-        icons={[
-          <NextJsIcon
-            className={clsx(
-              'h-5 w-5 transition duration-200 hover:text-[#000000] dark:hover:text-[#FFFFFF]'
-            )}
-          />,
-          <TailwindCssIcon
-            className={clsx(
-              'h-5 w-5 transition duration-200 hover:text-[#06B6D4]'
-            )}
-          />,
-        ]}
-        progress={100}
-      >
-        <SectionTitle
-          title="Code-Coffee-Repeat"
-          caption="Next JS"
-          description="This is a Next.js, Tailwind CSS blog about java, spring boot, programming, web development and everything else.It is based on Next App directory with React Server Component and uses Contentlayer to manage markdown content."
-          buttons={[
-            {
-              title: 'learn more',
-              href: 'https://github.com/MaheshBabu11/personal-blog',
-            },
-            {
-              title: 'Live Demo',
-              href: 'https://blog.maheshbabu11.dev/',
-            },
-          ]}
-        />
-        <SectionContent>
-          <div className={clsx('flex', 'lg:gap-12')}>
-            <div
-              className={clsx('hidden flex-1 flex-col gap-3 pt-8', 'lg:flex')}
-            >
-              <div className={clsx('flex flex-col gap-3')}>
-                <SectionButton
-                  title="Available on GitHub"
-                  icon={<GitHubIcon className={clsx('my-2 h-16 w-16')} />}
-                  description="Access powerful and flexible package on GitHub with MIT license."
-                  active={currentState === 'github'}
-                  onClick={() => setCurrentState('github')}
-                />
-              </div>
-            </div>
-            <div className={clsx('w-full', 'lg:w-auto')}>
-              <div className={clsx('-mt-[41px]')}>
-                <div className={clsx('w-full', 'lg:h-[400px] lg:w-[600px]')}>
-                  <AppWindow
-                    type="browser"
-                    browserTabs={[
-                      {
-                        icon: <GitHubIcon className="h-4 w-4" />,
-                        title: 'MaheshBabu11/personal-blog - GitHub',
-                        isActive: currentState === 'github',
-                      },
-                    ]}
-                  >
-                    {currentState === 'github' && (
-                      <GitHubWireframe
-                        author="MaheshBabu11"
-                        license="Apache-2.0 license"
-                        repository="personal-blog"
-                        description="This is my tech blog that where I write about java, spring boot, programming, web development and everything else."
-                      />
-                    )}
-                  </AppWindow>
-                </div>
-              </div>
-            </div>
-          </div>
-        </SectionContent>
-      </Accordion>
+        {copy[language].cta}
+      </div>
     </div>
   );
 }

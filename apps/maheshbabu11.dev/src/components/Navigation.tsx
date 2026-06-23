@@ -1,28 +1,71 @@
 import clsx from 'clsx';
+import { m } from 'framer-motion';
+import { useRouter } from 'next/router';
 
-import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  TwitterIcon,
-} from '@/components/Icons';
+import { GitHubIcon, InstagramIcon, LinkedInIcon } from '@/components/Icons';
+import { useLanguage, type Language } from '@/contexts/LanguageContext';
 import NavIcon from '@/components/navigations/NavIcon';
 import NavIconQuickAccess from '@/components/navigations/NavIconQuickAccess';
 import NavLink from '@/components/navigations/NavLink';
-import NavLinkDropdown from '@/components/navigations/NavLinkDropdown';
-import NavLinkExpanded from '@/components/navigations/NavLinkExpanded';
 import NavLogo from '@/components/navigations/NavLogo';
 
 import useOnScroll from '@/hooks/useOnScroll';
 
-const workLinks = [
-  { title: 'Skills & Tools', href: '/work/skills-and-tools' },
-  { title: 'Experience', href: '/work/experience' },
-  { title: 'Contact', href: '/work/contact' },
-];
+function LanguageSwitcher() {
+  const { language, setLanguage } = useLanguage();
+
+  const handleLanguageChange = (lang: Language) => {
+    setLanguage(lang);
+  };
+
+  return (
+    <li className={clsx('flex items-center')}>
+      <div className={clsx('flex gap-1 rounded-full bg-slate-100 p-1 dark:bg-slate-800')}>
+        <m.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => handleLanguageChange('es')}
+          className={clsx(
+            'px-3 py-1 text-xs font-semibold rounded-full transition-all',
+            language === 'es'
+              ? 'bg-accent-500 text-white dark:bg-accent-400'
+              : 'text-slate-600 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
+          )}
+        >
+          ES
+        </m.button>
+        <m.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => handleLanguageChange('en')}
+          className={clsx(
+            'px-3 py-1 text-xs font-semibold rounded-full transition-all',
+            language === 'en'
+              ? 'bg-accent-500 text-white dark:bg-accent-400'
+              : 'text-slate-600 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
+          )}
+        >
+          EN
+        </m.button>
+      </div>
+    </li>
+  );
+}
 
 function Navbar() {
   const isScrolled = useOnScroll(0);
+  const { t } = useLanguage();
+  const router = useRouter();
+
+  const workLinks = [
+    { title: t('skills'), href: '/work/skills-and-tools' },
+    { title: t('experience'), href: '/work/experience' },
+    { title: t('servicios'), href: '/work/servicios' },
+    { title: t('contact'), href: '/work/contact' },
+  ];
+  const currentPath = router.asPath.split('?')[0];
+  const isRouteActive = (href: string) =>
+    currentPath === href || currentPath.startsWith(`${href}/`);
 
   return (
     <header
@@ -51,46 +94,43 @@ function Navbar() {
           <nav className={clsx('flex', 'md:gap-2')} data-accent="violet">
             <NavLogo href="/" title="Home" />
             <ul className={clsx('flex items-center', 'md:gap-1')}>
+              <li className="mx-3 h-5 w-px bg-slate-200 dark:bg-slate-700" />
               <li>
-                <NavLink title="Projects" href="/projects" />
+                <NavLink
+                  title={t('projects')}
+                  href="/projects"
+                  active={isRouteActive('/projects')}
+                />
               </li>
-              <li>
-                <NavLink title="Blog" href="https://blog.maheshbabu11.dev/" />
-              </li>
-
-              <li className={clsx('lg:hidden')} data-accent="blue">
-                <NavLinkDropdown title="Work" items={workLinks} />
-              </li>
-              <li className={clsx('hidden lg:block')} data-accent="blue">
-                <NavLinkExpanded title="Work" items={workLinks} />
-              </li>
+              {workLinks.map((item) => (
+                <li key={item.href}>
+                  <NavLink
+                    title={item.title}
+                    href={item.href}
+                    active={isRouteActive(item.href)}
+                  />
+                </li>
+              ))}
             </ul>
           </nav>
           <ul className={clsx('flex items-center')}>
             <li className={clsx('hidden', 'sm:block')}>
               <NavIcon
-                href="https://www.linkedin.com/in/maheshbabu11/"
+                href="https://linkedin.com/in/junior-sulca-mendez-980366219"
                 icon={<LinkedInIcon className={clsx('h-5 w-5')} />}
-                title="Twitter"
+                title="LinkedIn"
               />
             </li>
             <li className={clsx('hidden', 'sm:block')}>
               <NavIcon
-                href="https://www.instagram.com/m_r.coder/"
+                href="https://www.instagram.com/jean_sm2743/"
                 icon={<InstagramIcon className={clsx('h-5 w-5')} />}
                 title="Instagram"
               />
             </li>
             <li className={clsx('hidden', 'sm:block')}>
               <NavIcon
-                href="https://twitter.com/MaheshBabu11_"
-                icon={<TwitterIcon className={clsx('h-5 w-5')} />}
-                title="Twitter"
-              />
-            </li>
-            <li className={clsx('hidden', 'sm:block')}>
-              <NavIcon
-                href="https://github.com/MaheshBabu11"
+                href="https://github.com/Jean-snt"
                 icon={<GitHubIcon className={clsx('h-5 w-5')} />}
                 title="GitHub"
               />
@@ -103,6 +143,7 @@ function Navbar() {
                 )}
               />
             </li>
+            <LanguageSwitcher />
             <li className={clsx('mr-2')}>
               <NavIconQuickAccess />
             </li>

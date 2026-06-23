@@ -1,10 +1,13 @@
 import clsx from 'clsx';
 
-import { GitHubIcon, LinkedInIcon, TwitterIcon } from '@/components/Icons';
+import { GitHubIcon, InstagramIcon, LinkedInIcon } from '@/components/Icons';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 import dayjs from '@/utils/dayjs';
 
 function FooterDescription() {
+  const { t } = useLanguage();
+
   return (
     <div className={clsx('max-w-[348px]')}>
       <div
@@ -13,48 +16,47 @@ function FooterDescription() {
           'dark:text-slate-400'
         )}
       >
-        About Me
+        {t('aboutMe')}
       </div>
-      <p className={clsx('mb-4 font-normal leading-relaxed')}>
-        I&apos;m Mahesh, a <strong>back-end developer</strong> who loves to
-        tinker with new technologies and build cool stuff. I&apos;m currently
-        woking with Java and Spring Boot.
-      </p>
+      <p
+        className={clsx('mb-4 font-normal leading-relaxed')}
+        dangerouslySetInnerHTML={{ __html: t('aboutDescription') }}
+      />
       <ul className={clsx('-ml-2 flex gap-1')}>
         <li>
           <a
-            href="https://twitter.com/MaheshBabu11_/"
+            href="https://github.com/Jean-snt"
             target="_blank"
             rel="noreferrer nofollow"
             className={clsx('flex h-9 w-9 items-center justify-center')}
-            aria-label="My Twitter profile"
-            title="My Twitter profile"
-          >
-            <TwitterIcon className={clsx('h-5 w-5')} />
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://github.com/maheshbabu11/"
-            target="_blank"
-            rel="noreferrer nofollow"
-            className={clsx('flex h-9 w-9 items-center justify-center')}
-            aria-label="My GitHub profile"
-            title="My GitHub profile"
+            aria-label="GitHub"
+            title="GitHub"
           >
             <GitHubIcon className={clsx('h-5 w-5')} />
           </a>
         </li>
         <li>
           <a
-            href="https://www.linkedin.com/in/maheshbabu11/"
+            href="https://linkedin.com/in/junior-sulca-mendez-980366219"
             target="_blank"
             rel="noreferrer nofollow"
             className={clsx('flex h-9 w-9 items-center justify-center')}
-            aria-label="My LinkedIn profile"
-            title="My LinkedIn profile"
+            aria-label="LinkedIn"
+            title="LinkedIn"
           >
             <LinkedInIcon className={clsx('h-5 w-5')} />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.instagram.com/jean_sm2743/"
+            target="_blank"
+            rel="noreferrer nofollow"
+            className={clsx('flex h-9 w-9 items-center justify-center')}
+            aria-label="Instagram"
+            title="Instagram"
+          >
+            <InstagramIcon className={clsx('h-5 w-5')} />
           </a>
         </li>
       </ul>
@@ -63,6 +65,9 @@ function FooterDescription() {
 }
 
 function Footer() {
+  const { t } = useLanguage();
+  const year = dayjs().format('YYYY');
+
   return (
     <footer
       className={clsx(
@@ -80,12 +85,12 @@ function Footer() {
               <img
                 className="h-30 w-60"
                 alt="Github Stats"
-                src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=maheshbabu11&theme=transparent"
+                src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Jean-snt&theme=transparent"
               />
               <img
                 className="h-50 w-80"
                 alt="Github Profile Summary"
-                src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=maheshbabu11&theme=transparent"
+                src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Jean-snt&theme=transparent"
               />
             </div>
           </div>
@@ -97,7 +102,7 @@ function Footer() {
           )}
         >
           <div className={clsx('font-semibold')}>
-            &copy; {dayjs().format('YYYY')}, Mahesh Babu
+            {t('copyright', { year })}
           </div>
         </div>
       </div>

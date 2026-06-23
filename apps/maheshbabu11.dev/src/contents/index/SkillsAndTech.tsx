@@ -1,163 +1,100 @@
 import Image from 'next/image';
 
+import { useLanguage } from '@/contexts/LanguageContext';
+
+const techIcons = [
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg',
+    alt: 'C#',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg',
+    alt: '.NET',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    alt: 'Python',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg',
+    alt: 'Django',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',
+    alt: 'FastAPI',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    alt: 'Node.js',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg',
+    alt: 'Go',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    alt: 'React',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+    alt: 'JavaScript',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+    alt: 'HTML5',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+    alt: 'CSS3',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain-wordmark.svg',
+    alt: 'SQL Server',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+    alt: 'MongoDB',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+    alt: 'MySQL',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    alt: 'PostgreSQL',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+    alt: 'Docker',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg',
+    alt: 'Azure',
+  },
+  {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+    alt: 'Git',
+  },
+];
+
 function SkillsAndTech() {
+  const { language } = useLanguage();
+
   return (
     <div className="content-wrapper">
-      <h1 className=" text-3xl font-bold">🔨 My Arsenal </h1>
-      <div className="image-container mt-4 flex flex-wrap justify-center space-x-4 space-y-4">
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg"
-          alt="java"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"
-          alt="C"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-          alt="Python"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
-          alt="C++"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
-          alt="spring"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original-wordmark.svg"
-          alt="apache"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
-          alt="azure"
-          height="50"
-          width="50"
-        />
-
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
-          alt="C++"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg"
-          alt="Flask"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
-          alt="Git"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-          alt="Github"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://www.vectorlogo.zone/logos/hibernate/hibernate-icon.svg"
-          alt="Hibernate"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="/assets/images/logo/file_type_maven.svg"
-          alt="Maven"
-          height="50"
-          width="50"
-          crossOrigin=""
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg"
-          alt="Intellij"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg"
-          alt="Jira"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/latex/latex-original.svg"
-          alt="Latex"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-          alt="Mysql"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg"
-          alt="Oracle"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
-          alt="Postgress"
-          height="50"
-          width="50"
-        />
-
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain-wordmark.svg"
-          alt="SqlServer"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
-          alt="TensorFlow"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg"
-          alt="OpenCv"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg"
-          alt="PyCharm"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg"
-          alt="Postman"
-          height="50"
-          width="50"
-        />
-        <Image
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
-          alt="Docker"
-          height="50"
-          width="50"
-        />
+      <h1 className="text-3xl font-bold">
+        {language === 'es' ? 'Mi arsenal tecnico' : 'My Technical Arsenal'}
+      </h1>
+      <div className="image-container mt-4 flex flex-wrap justify-center gap-4">
+        {techIcons.map((icon) => (
+          <Image
+            key={icon.alt}
+            src={icon.src}
+            alt={icon.alt}
+            height="50"
+            width="50"
+          />
+        ))}
       </div>
     </div>
   );

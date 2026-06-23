@@ -1,6 +1,10 @@
 import clsx from 'clsx';
 
+import { useLanguage } from '@/contexts/LanguageContext';
+
 function GithubContribCard() {
+  const { language } = useLanguage();
+
   return (
     <div>
       <div className={clsx('flex items-center justify-center')}>
@@ -51,7 +55,7 @@ function GithubContribCard() {
             'dark:text-slate-400'
           )}
         >
-          Activity
+          {language === 'es' ? 'Actividad' : 'Activity'}
         </strong>
       </div>
       <div className={clsx('flex items-center justify-center py-3')}>

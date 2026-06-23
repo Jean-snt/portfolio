@@ -3,6 +3,7 @@ import { m, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 
 import { DocumentIcon } from '@/components/Icons';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const animation = {
   hide: {
@@ -21,31 +22,36 @@ interface HeaderCtaProps {
 }
 
 function ButtonContactMe() {
+  const { t } = useLanguage();
   return (
     <Link
       href="/work/contact"
       className={clsx('button button--solid min-w-[128px]', 'md:button--big')}
     >
-      Get in Touch
+      {t('ctaContact')}
     </Link>
   );
 }
 
 function ButtonResume() {
+  const { t } = useLanguage();
   return (
-    <a
+    <m.a
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
       target="_blank"
-      rel="noreferrer nofollow"
-      href="https://drive.google.com/file/d/1F12Saxl05JjE8fMjBqVpgzOlJtRgX8Z9/view?usp=sharing"
+      rel="noopener noreferrer"
+      href="/Junior_Sulca_CV.pdf"
       className={clsx('button button--ghost px-2', 'md:button--big md:px-2')}
     >
       <DocumentIcon className={clsx('h-5 w-5')} />
-      RESUME
-    </a>
+      {t('ctaResume')}
+    </m.a>
   );
 }
 
 function AvailableForHire() {
+  const { t } = useLanguage();
   return (
     <div
       className={clsx(
@@ -68,7 +74,7 @@ function AvailableForHire() {
           )}
         />
       </span>
-      AVAILABLE FOR HIRE
+      {t('availableForHire')}
     </div>
   );
 }

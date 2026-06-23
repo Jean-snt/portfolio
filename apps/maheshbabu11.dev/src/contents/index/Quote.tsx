@@ -1,8 +1,11 @@
 import clsx from 'clsx';
 
 import { QuoteIcon } from '@/components/Icons';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 function Quote() {
+  const { language } = useLanguage();
+
   return (
     <div className={clsx('flex items-center justify-center')}>
       <img
@@ -30,14 +33,16 @@ function Quote() {
         />
         <span className={clsx('flex flex-col')}>
           <span className={clsx('leading-[1.15]')}>
-            <em>The best code is </em>{' '}
+            <em>
+              {language === 'es' ? 'El mejor codigo es ' : 'The best code is '}
+            </em>{' '}
             <strong
               className={clsx(
                 'font-extrabold text-slate-600',
                 'dark:text-slate-300'
               )}
             >
-              no code
+              {language === 'es' ? 'no escribir codigo' : 'no code'}
             </strong>
           </span>
           <span
@@ -54,23 +59,23 @@ function Quote() {
               )}
             />
             <span>
-              The{' '}
+              {language === 'es' ? 'Mientras ' : 'The '}
               <strong
                 className={clsx(
                   'font-extrabold text-slate-600',
                   'dark:text-slate-300'
                 )}
               >
-                fewer
+                {language === 'es' ? 'menos' : 'fewer'}
               </strong>{' '}
-              lines of{' '}
+              {language === 'es' ? 'lineas de ' : 'lines of '}
               <strong
                 className={clsx(
                   'font-extrabold text-slate-600',
                   'dark:text-slate-300'
                 )}
               >
-                code{' '}
+                {language === 'es' ? 'codigo ' : 'code '}
               </strong>
             </span>
             <span
@@ -82,7 +87,7 @@ function Quote() {
             />
           </span>
           <span className={clsx('leading-[1.15]')}>
-            The fewer{' '}
+            {language === 'es' ? 'Menos ' : 'The fewer '}
             <strong
               className={clsx(
                 'relative font-extrabold text-slate-600',
@@ -96,7 +101,7 @@ function Quote() {
                   'dark:bg-slate-800'
                 )}
               />
-              bugs!!!
+              {language === 'es' ? 'errores!!!' : 'bugs!!!'}
             </strong>
           </span>
         </span>

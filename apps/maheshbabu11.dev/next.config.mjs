@@ -21,6 +21,27 @@ const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   reactStrictMode: true,
   swcMinify: true,
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.watchOptions = {
+        ...config.watchOptions,
+        ignored: [
+          ...(Array.isArray(config.watchOptions?.ignored)
+            ? config.watchOptions.ignored
+            : []),
+          '**/.next/**',
+          '**/.turbo/**',
+          '**/node_modules/**',
+          'C:/DumpStack.log.tmp',
+          'C:/hiberfil.sys',
+          'C:/pagefile.sys',
+          'C:/swapfile.sys',
+        ],
+      };
+    }
+
+    return config;
+  },
 };
 
 const withBundleAnalyzer = bundeAnalyzer({
@@ -40,6 +61,7 @@ const withPWAConfig = withPWAInit({
   dest: 'public',
   register: true,
   skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
 });
 
 export default withPWAConfig(withBundleAnalyzer(withMDX(nextConfig)));
