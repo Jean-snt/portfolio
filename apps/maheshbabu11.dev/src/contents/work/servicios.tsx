@@ -108,15 +108,15 @@ function ServiciosContents() {
 
   return (
     <div className="space-y-10">
-      {sections.map((section, sectionIdx) => (
-        <div key={sectionIdx} className="space-y-4">
+      {sections.map((section) => (
+        <div key={section.titleKey} className="space-y-4">
           <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 border-l-4 border-accent-500 pl-4">
             {t(section.titleKey)}
           </h3>
           <div className="grid gap-6 md:grid-cols-2">
-            {section.teams.map((team, teamIdx) => (
+            {section.teams.map((team) => (
               <div
-                key={teamIdx}
+                key={team.nameKey}
                 className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-accent-500 hover:shadow-md dark:border-slate-800 dark:bg-slate-900"
               >
                 <div className="mb-3 flex items-center gap-2">
